@@ -15,26 +15,25 @@ export default class CustomCategoryBanner extends Component {
 
   get bannerBg() {
     const schemeType = getComputedStyle(document.body)
-    .getPropertyValue("--scheme-type")
-    .trim();
+      .getPropertyValue("--scheme-type")
+      .trim();
+    var background_url = this.category.uploaded_background?.url
 
     // console.log(schemeType);
 
     if (schemeType == "dark") {
-      return htmlSafe(
-        `background: url("${this.category.uploaded_background_dark?.url}");
-         background-size: cover; 
-         background-position: center center;;`
-      );
+      // console.log("Uploaded_background_dark.url")
+      // console.log(this.category.uploaded_background_dark?.url)
+      if (this.category.uploaded_background_dark?.url) {
+        background_url = this.category.uploaded_background_dark?.url
+      }
+    }
 
-    }
-    else {
-      return htmlSafe(
-        `background: url("${this.category.uploaded_background?.url}");
-       background-size: cover; 
-       background-position: center center;;`
-      );
-    }
+    return htmlSafe(
+      `background: url("${background_url}");
+     background-size: cover; 
+     background-position: center center;;`
+    );
 
 
   }
